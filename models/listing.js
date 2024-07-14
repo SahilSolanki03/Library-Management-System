@@ -14,9 +14,28 @@ const listningSchema = new Schema({
         default : "https://th.bing.com/th/id/OIP.UMe7YZIQF7CqrolTjiO9jwHaEo?rs=1&pid=ImgDetMain",
         set: (v) => v === "" ? "https://th.bing.com/th/id/OIP.UMe7YZIQF7CqrolTjiO9jwHaEo?rs=1&pid=ImgDetMain" : v,
     },
-    price : Number,
-    location : String,
-    country : String, 
+    author: {
+        type: String,
+        required: true,
+    },
+    publisher: {
+        type: String,
+    },
+    year: {
+        type: Number,
+    },
+    genre: {
+        type: String,
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        default: 1,
+    },
+    ISBN: {
+        type: String,
+        required: true,
+    },
     reviews : [
         {
             type : Schema.Types.ObjectId,

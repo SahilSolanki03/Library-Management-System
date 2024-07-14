@@ -1,28 +1,72 @@
 <% layout("/layouts/boylerplate") -%>
 <body>
-    <h3>All listings</h3>
     <!-- <form method="get" action="/listing/new">
         <button>Create new listings</button>
     </form> -->
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-    <% for( let listing of allListings){ %>
-        <a href="/listings/<%= listing._id %>" class="listing-links">
-            <div class="listing-card card col">
-                <img src="<%= listing.image %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
 
-                <div class="card-img-overlay"></div>
+    <div class="row">
+        <div class="mb-3 col-md-6 col-12">
+            <h3>Tranding Books</h3>
+            <% for( let listing of data.trendData){ %> 
+                    <div class="card mb-3">
+                        <div class="row g-2">
+                        <div class="col-md-3">
+                            <img src="<%= listing.volumeInfo.smallThumbnail %>" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-7 mt-3">
+                            <div class="card-body">
+                            <h5 class="card-title"><%= listing.volumeInfo.title %></h5>
+                            <p class="card-text"><small class="text-body-secondary"><%= listing.volumeInfo.authors[0] %></small> | <small class="text-body-secondary"><%= listing.volumeInfo.publisher %></small> | <small class="text-body-secondary"><%= listing.volumeInfo.publishedDate %></small></p>
+                            <p class="card-text"><%= listing.volumeInfo.description %></p>
+                            <a href="/listings/<%= listing.volumeInfo.title %>" class="listing-links">Read More!</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            <% } %>
+        </div>
+        <div class="mb-3 col-md-6 col-12">
+            <h3>New Books</h3>
+            <% for( let listing of data.newData){ %> 
+                <div class="card mb-3">
+                    <div class="row g-2">
+                    <div class="col-md-3">
+                        <img src="<%= listing.volumeInfo.smallThumbnail %>" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-7 mt-3">
+                        <div class="card-body">
+                        <h5 class="card-title"><%= listing.volumeInfo.title %></h5>
+                        <p class="card-text"> | <small class="text-body-secondary"><%= listing.volumeInfo.publisher %></small> | <small class="text-body-secondary"><%= listing.volumeInfo.publishedDate %></small></p>
+                        <p class="card-text"><%= listing.volumeInfo.description %></p>
+                        <a href="/listings/<%= listing._id %>" class="listing-links">Read More!</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
 
-                <div class="card-body">
-                <p class="card-text">
-                    <b> <%= listing.title %> </b>
-                    <br>
-                    &#8377; <%= listing.price.toLocaleString("en-IN") %> /Night
-                </p>
+    <!-- <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1"> -->
+    <h3>Local sellers</h3>
+    <% for( let listing of data.allListings){ %> 
+            <div class="card mb-3">
+                <div class="row g-2">
+                  <div class="col-md-3">
+                    <img src="<%= listing.image %>" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-7 mt-5">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= listing.title %></h5>
+                      <p class="card-text"><small class="text-body-secondary"><%= listing.author %></small> | <small class="text-body-secondary"><%= listing.publisher %></small> | <small class="text-body-secondary"><%= listing.year %></small></p>
+                      <p class="card-text"><%= listing.description %></p>
+                      <a href="/listings/<%= listing._id %>" class="listing-links">Read More!</a>
+                    </div>
+                  </div>
                 </div>
             </div>
-        </a>
     <% } %>
-    </div>
+    <!-- </div> -->
 
 </body>
 

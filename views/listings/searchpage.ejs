@@ -1,0 +1,16 @@
+<% layout("/layouts/boylerplate") -%>
+<body>
+    <div class="row">
+        <div class="col-8 offset-2 mt-2">
+            <h3>Search Books</h3>
+            <form method="post" action="/listings/search" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="q" class="form-lable">search</label>
+                    <input type="text" name="q" placeholder="Add catchy Title" class="form-control" required>
+                    <div class="invalid-feedback">write something</div>
+                </div>
+                <button class="btn btn-dark add-btn mb-2">search</button>
+            </form>
+        </div>
+    </div>
+</body>

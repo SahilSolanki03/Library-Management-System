@@ -1,63 +1,45 @@
 <% layout("/layouts/boylerplate") -%>
 <body>
     <div class="row mt-3">
-        <div class="col-6 offset-3">
-            <h3><b><%= listing.title %></b></h3>
-            <div class="listing-card card">
-                <img src="<%= listing.image %>" class="card-img-top show-image" alt="listing_image">
+        <div class="col-10 offset-1">
+            <h3><%= searchDatas[0].volumeInfo.title %></h3>
+            <div class="card mb-3">
+                <div class="row g-2">
+                <div class="col-md-4 offset-4 border border-dark rounded p-2">
+                    <img src="<%= searchDatas[0].volumeInfo.smallThumbnail %>" class="card-img-top rounded-start text-center" alt="...">
+                </div>
                 <div class="card-body">
-                    <p class="card-text"><b>Owned by: </b><i><%= user.username %></i></p>
-                    <p class="card-text"><%= listing.description %></p>
-                    <p class="card-text">Price: &#8377; <%= listing.price.toLocaleString("en-IN") %></p>
-                    <p class="card-text">Location: <%= listing.location %></p>
-                    <p class="card-text">Country: <%= listing.country %></p>
+                <div class="m-3">
+                    <div class="card-body">
+                    <h5 class="card-title"><%= searchDatas[0].volumeInfo.title %></h5>
+                    <p class="card-text"> | <small class="text-body-secondary"><%= searchDatas[0].volumeInfo.publisher %></small> | <small class="text-body-secondary"><%= searchDatas[0].volumeInfo.publishedDate %></small></p>
+                    <p class="card-text"><%= searchDatas[0].volumeInfo.description %></p>
+                    <a href="/listings/<%= searchDatas[0].volumeInfo.title %>" class="listing-links">Read More!</a>
+                    </div>
+                </div>
+                </div>
                 </div>
             </div>
-            <% if(crrUser && crrUser._id.equals(listing.owner._id)) { %>
-            <div class="row mb-3">
-                <form method="get" action="/listings/<%= listing._id %>/edit" class="col-2">
-                    <button class="btn btn-dark edit-btn">Edit</button>
-                </form>
-                <form method="post" action="/listings/<%= listing._id %>?_method=DELETE" class="col-2">
-                    <button class="btn btn-dark delete-btn">Delete</button>
-                </form>
-            </div>
-            <% } %>
-        </div>
-        <div class="col-6 offset-3 mb-3">
-            <hr>
-            <h4>Leave a Review</h4>
-            <form method="post" action="/listings/<%= listing._id %>/reviews" class="needs-validation" novalidate>
-                <div class="mb-3 mt-3">
-                    <label for="rating" class="form-lable">Rating</label>
-                    <input type="range" min="1" max="5" name="review[rating]" id="rating" class="form-range" required>
-                </div>
-                <div class="mb-3 mt-3">
-                    <label for="comment" class="form-lable">Comment</label>
-                    <textarea name="review[comment]" id="comment" cols="20" rows="3" placeholder="Leave a comment" class="form-control" required></textarea>
-                    <div class="invalid-feedback">Please add some comment for review</div>
-                </div>
-                <button class="btn btn-outline-dark  mb-2">Submit</button>
-            </form>
-            <hr>
-            <p><b>All Rewiews</b></p>
-            <div class="row">
-                <% if(listing.reviews.length == 0) {%>
-                    <p>No rewiews available</p>
-                <% } %>
-                <% for(let review of listing.reviews) {%>
-                    <div class="card col-5 ms-3 mb-3">
+            <h3>Recomandation</h3>
+            <% for( let listing of searchDatas){ %> 
+                <div class="card mb-3">
+                    <div class="row g-2">
+                    <div class="col-md-4 offset-4 border border-dark rounded p-2">
+                        <img src="<%= listing.volumeInfo.smallThumbnail %>" class="card-img-top rounded-start" alt="...">
+                    </div>
+                    <div class="card-body">
+                    <div class="m-3">
                         <div class="card-body">
-                            <h5 class="card-title">Jane Doe</h5>
-                            <p class="card-text"><%= review.comment %></p>
-                            <p class="card-text"><%= review.rating %> Stars</p>
-                            <form class="mb-3" method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
-                                <button class="btn btn-sm btn-dark">Delete</button>
-                            </form>
+                        <h5 class="card-title"><%= listing.volumeInfo.title %></h5>
+                        <p class="card-text"> | <small class="text-body-secondary"><%= listing.volumeInfo.publisher %></small> | <small class="text-body-secondary"><%= listing.volumeInfo.publishedDate %></small></p>
+                        <p class="card-text"><%= listing.volumeInfo.description %></p>
+                        <a href="/listings/<%= listing.volumeInfo.title %>" class="listing-links">Read More!</a>
                         </div>
                     </div>
-                <% } %>
-            </div>
+                    </div>
+                    </div>
+                </div>
+        <% } %>
         </div>
     </div>
 </body>

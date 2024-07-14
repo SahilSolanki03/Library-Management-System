@@ -1,0 +1,33 @@
+<% layout("/layouts/boylerplate") -%>
+<body>
+    <div class="row">
+        <div class="col-8 offset-2 mt-2">
+            <h3>Search Books</h3>
+            <form method="post" action="/listings/search" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="q" class="form-lable">search</label>
+                    <input type="text" name="q" placeholder="Add catchy Title" class="form-control" required>
+                    <div class="invalid-feedback">write something</div>
+                </div>
+                <button class="btn btn-dark add-btn mb-2">search</button>
+            </form>
+                <% for( let listing of searchDatas){ %> 
+                    <div class="card mb-3">
+                        <div class="row g-2">
+                        <div class="col-md-3">
+                            <img src="<%= listing.volumeInfo.smallThumbnail %>" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-7 mt-3">
+                            <div class="card-body">
+                            <h5 class="card-title"><%= listing.volumeInfo.title %></h5>
+                            <p class="card-text"> | <small class="text-body-secondary"><%= listing.volumeInfo.publisher %></small> | <small class="text-body-secondary"><%= listing.volumeInfo.publishedDate %></small></p>
+                            <p class="card-text"><%= listing.volumeInfo.description %></p>
+                            <a href="/listings/<%= listing._id %>" class="listing-links">Read More!</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                <% } %>
+        </div>
+    </div>
+</body>
