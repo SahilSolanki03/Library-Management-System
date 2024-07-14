@@ -11,8 +11,8 @@ const listningSchema = new Schema({
     description : String,
     image : {
         type : String,
-        default : "https://th.bing.com/th/id/OIP.UMe7YZIQF7CqrolTjiO9jwHaEo?rs=1&pid=ImgDetMain",
-        set: (v) => v === "" ? "https://th.bing.com/th/id/OIP.UMe7YZIQF7CqrolTjiO9jwHaEo?rs=1&pid=ImgDetMain" : v,
+        default : "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1718785229~exp=1718788829~hmac=72ee277a6ec9bdf4d2013effddd0cbc54f7b0efafec240cbd7bfdc7f953bc3f6&w=740",
+        set: (v) => v === "" ? "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?t=st=1718785229~exp=1718788829~hmac=72ee277a6ec9bdf4d2013effddd0cbc54f7b0efafec240cbd7bfdc7f953bc3f6&w=740" : v,
     },
     author: {
         type: String,

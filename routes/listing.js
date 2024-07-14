@@ -101,36 +101,38 @@ router.get("/:id", wrapAsync( async(req,res)=>{
     res.render("listings/show.ejs",{ searchDatas });
 }))
 
-//New listings
-router.get("/new/add", issLoggedin ,(req,res)=>{
+//New book listings
+router.get("/new/add", issLoggedin, (req, res) => {
     res.render("listings/new.ejs");
-})
+});
 
-router.post("/", issLoggedin , velidateListing, wrapAsync( async(req,res)=>{
+router.post("/", issLoggedin, wrapAsync(async (req, res) => {
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
     await newListing.save();
-    req.flash("success","New listing created!");
+    req.flash("success", "New book listing created!");
     res.redirect("/listings");
-}))
+}));
 
-//Edit listings
-router.get("/:id/edit", issLoggedin, issOwner ,wrapAsync( async(req,res)=>{
+
+// Edit book listings
+router.get("/:id/edit", issLoggedin, issOwner, wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let listing =  await Listing.findById(id);
-    if(!listing){
-        req.flash("error","Listing dose not Exist!");
-        res.redirect("/listings");
+    let listing = await Listing.findById(id);
+    if (!listing) {
+        req.flash("error", "Listing does not exist!");
+        return res.redirect("/listings");
     }
-    res.render("listings/edit.ejs",{ listing });
-}))
+    res.render("listings/edit.ejs", { listing });
+}));
 
-router.put("/:id", issLoggedin, issOwner , velidateListing ,wrapAsync( async(req,res)=>{
+router.put("/:id", issLoggedin, issOwner, wrapAsync(async (req, res) => {
     let { id } = req.params;
-    await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    req.flash("success","listing Updated!");
+    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    req.flash("success", "Listing updated!");
     res.redirect(`/listings/${id}`);
-}))
+}));
+
 
 //delete listings
 router.delete("/:id", issLoggedin, issOwner ,wrapAsync( async(req,res)=>{
